@@ -6,23 +6,35 @@ Tp = 0.01; %tidskonstant nye lån
 Tf = 0.5; %tidskonstant firmaer
 VAT = 0.07; %Value-added Tax
 S = 1; %lønnskrav 
-target = 0.97; %arbiedsutnyytelse
+target = 3500000; %arbiedsutnyytelse
+Kp = 10000;
 
 sim_time = 200;
 
-out = sim('gov_shock', sim_time);
+out = sim('gov_extended_2', sim_time);
 
 figure('rend','painters','pos',[10 10 750 400])
 hold on;
 plot(out.offentlig, "b");
 plot(out.privat, "r");
 plot(out.total, "g");
-plot(out.penger, "k");
-title("Government");
+title("Employment");
 xlabel("time [s]");
 ylabel("employment");
 grid on;
 hold off;
-legend({"offentlig","privat","total", "penger"}, "Location", "northeast");
+legend({"offentlig","privat","total"}, "Location", "northeast");
 %legend({"Ck", "Cw"}, "Location", "northeast");
 %legend({"Loans"}, "Location", "northeast");
+
+figure('rend','painters','pos',[10 10 750 400])
+hold on;
+plot(out.penger, "b");
+plot(out.taxes, "r");
+plot(out.spending, "g");
+title("Money");
+xlabel("time [s]");
+ylabel("Money");
+grid on;
+hold off;
+legend({"penger","taxes","spending"}, "Location", "northeast");
